@@ -3,6 +3,10 @@ $("#currentDay").text(currentDate);
 
 let hourlyTasks = {};
 
+const saveTasks = function() {
+    localStorage.setItem("task", JSON.stringify(hourlyTasks));
+}
+
 $(".time-block").on("click", "div", function() {
     let taskId = $(this)
         .attr("id")
@@ -41,6 +45,7 @@ $(".time-block").on("click", ".saveBtn", function () {
         console.log(divId)
     textEl.replaceWith(divId);
     console.log(textEl)
-    tasks[id] = taskText;
+    hourlyTasks[id] = taskText;
     console.log(hourlyTasks)
+    saveTasks();
 })
