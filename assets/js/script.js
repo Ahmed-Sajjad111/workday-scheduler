@@ -84,3 +84,7 @@ $(".time-block").on("click", ".saveBtn", function () {
 timeChecker();
 
 displayTasks();
+
+setInterval(function() {
+    timeChecker();
+}, 60000);
