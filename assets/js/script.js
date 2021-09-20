@@ -7,6 +7,41 @@ const saveTasks = function() {
     localStorage.setItem("task", JSON.stringify(hourlyTasks));
 }
 
+const displayTasks = function () {
+    hourlyTasks = JSON.parse(localStorage.getItem("task"));
+    if (!hourlyTasks) {
+        hourlyTasks = {
+            9: "",
+            10: "",
+            11: "",
+            12: "",
+            13: "",
+            14: "",
+            15: "",
+            16: "",
+            17: ""
+        };
+    } else {
+        $.each(hourlyTasks, function (id, text) {
+            $("#div" + id).text(text);
+        })
+    }
+}
+
+const timeChecker = function() {
+    $(".description").each(function() {
+        let currentHour = parseInt(moment().hour());
+        let hourBlock = parseInt($(this).attr("id").replace("div", ""));
+        if (currentHour > hourBlock) {
+            $(this).addClass("past");
+        } else if (currentHour === hourBlock) {
+            $(this).addClass("present");
+        } else if (currentHour < hourBlock) {
+            $(this).addClass("future");
+        }
+    });
+}
+
 $(".time-block").on("click", "div", function() {
     let taskId = $(this)
         .attr("id")
@@ -41,11 +76,11 @@ $(".time-block").on("click", ".saveBtn", function () {
         .attr("id", "div" + id)
         .addClass(textEl.attr("class"))
         .text(taskText)
-        console.log(textEl)
-        console.log(divId)
     textEl.replaceWith(divId);
-    console.log(textEl)
     hourlyTasks[id] = taskText;
-    console.log(hourlyTasks)
     saveTasks();
 })
+
+timeChecker();
+
+displayTasks();
