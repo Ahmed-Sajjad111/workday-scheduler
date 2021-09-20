@@ -1,12 +1,16 @@
+// create date and assign id to display on HTML
 let currentDate = moment().format("dddd, MMM Do");
 $("#currentDay").text(currentDate);
 
+// object to hold all tasks
 let hourlyTasks = {};
 
+// save tasks to local storage
 const saveTasks = function() {
     localStorage.setItem("task", JSON.stringify(hourlyTasks));
 }
 
+// gets and displays tasks from local storage
 const displayTasks = function () {
     hourlyTasks = JSON.parse(localStorage.getItem("task"));
     if (!hourlyTasks) {
@@ -28,6 +32,7 @@ const displayTasks = function () {
     }
 }
 
+// checks current time with hour blocks and assigns proper class
 const timeChecker = function() {
     $(".description").each(function() {
         let currentHour = parseInt(moment().hour());
@@ -42,6 +47,7 @@ const timeChecker = function() {
     });
 }
 
+// on click event for editing task
 $(".time-block").on("click", "div", function() {
     let taskId = $(this)
         .attr("id")
@@ -59,6 +65,7 @@ $(".time-block").on("click", "div", function() {
     textInput.trigger("focus");
 })
 
+//on click event for save button to save task
 $(".time-block").on("click", ".saveBtn", function () {
     let id = $(this)
         .attr("id")
