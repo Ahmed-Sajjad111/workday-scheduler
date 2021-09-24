@@ -92,6 +92,6 @@ timeChecker();
 
 displayTasks();
 
-setInterval(function() {
+var timecheck = setInterval(function() {
     timeChecker();
 }, 60000);
