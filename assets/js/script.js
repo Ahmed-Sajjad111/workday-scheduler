@@ -38,11 +38,16 @@ const timeChecker = function() {
         let currentHour = parseInt(moment().hour());
         let hourBlock = parseInt($(this).attr("id").replace("div", ""));
         if (currentHour > hourBlock) {
+            $(this).removeClass("present");
             $(this).addClass("past");
+            console.log("changing to past")
         } else if (currentHour === hourBlock) {
+            $(this).removeClass("future");
             $(this).addClass("present");
+            console.log("changing to present")
         } else if (currentHour < hourBlock) {
             $(this).addClass("future");
+            console.log("changing to future")
         }
     });
 }
