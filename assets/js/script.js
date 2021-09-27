@@ -79,6 +79,7 @@ $(".time-block").on("click", ".saveBtn", function () {
     let taskText = textEl
         .val()
         .trim();
+        console.log(taskText)
     if (!taskText) {
         taskText = textEl
             .text()
